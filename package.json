@@ -1,0 +1,19 @@
+{
+  "name": "stori-challenge",
+  "version": "1.0.0",
+  "description": "Stori challenge for a backend developer position",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dave82911/stori-challenge.git"
+  },
+  "author": "David Ontiveros",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dave82911/stori-challenge/issues"
+  },
+  "homepage": "https://github.com/dave82911/stori-challenge#readme"
+}
