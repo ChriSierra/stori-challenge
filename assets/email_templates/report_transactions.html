@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stori Transactions Report</title>
+  </head>
+  <body style="margin: 0;">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;800&display=swap');
+    </style>
+    <div style="height: 100%; width: 100%; text-align: center;">
+      <div style="text-align: center;">
+        <div style="text-align: center; border: solid 0px;">
+          <div style="display: inline-block; width: 600px; background-color: #F6FAFF; margin: auto;">
+            <div style="padding: 20px 0px 20px 0px;
+              background: black;
+              background-size: contain;
+              background-position-x: center;
+              background-size: 600px 135px;
+              background-repeat: no-repeat;
+            ">
+              <img style="width: 80%;"
+                src="https://blog.storicard.com/wp-content/uploads/2019/07/stori.logo-horizontal-03.png">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background-color: #F6FAFF; width: 600px; margin: auto; padding: 10px 30px 30px 30px; box-sizing: border-box;">
+        <div style="min-height: 100%; min-width: 300px; box-sizing: border-box;
+          font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif; font-size: 14px; padding: 0; text-align: center; color: #706967; line-height: 1.2rem;
+        ">
+          <div style="text-align: center;">
+            <div style="margin-bottom: 20px;">
+              <p style="margin-bottom: 7px;"></p>
+              <p style="font-size: 20px; margin-top: 0;"><strong></strong></p>
+            </div>
+            <div style="color: #2E2C36; font-size: 40px; line-height: 60px;">
+              <strong>Transactions report</strong>
+            </div>
+          </div>
+          <div style="border-bottom: 1px solid rgba(106, 105, 110, 0.1); width: 540px; margin: 34px auto;"></div>
+          <div style="text-align: justify;">
+            <div style="margin-bottom: 20px; margin-top: 40px;">
+              hi {{user}}, from stori we have generated your transactions report, please pay attention to the total balance and the average of your transactions per month, thank you.
+            </div>
+            <div style="margin-bottom: 20px; margin-top: 20px;">
+              Total balance: {{totalBalance}}
+            </div>
+            <div style="margin-bottom: 20px; margin-top: 20px;">
+              Average debit amount: {{averageDebitTransactions}}
+            </div>
+            <div style="margin-bottom: 20px; margin-top: 20px;">
+              Average credit amount: {{averageCreditTransactions}}
+            </div>
+            {{#monthlyTransactions}}
+              <div style="margin-bottom: 20px; margin-top: 20px;">
+                Number of transactions in {{month}} : {{value}}
+              </div>
+            {{/monthlyTransactions}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
