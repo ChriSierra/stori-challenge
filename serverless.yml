@@ -1,0 +1,65 @@
+org: dave82911
+app: stori-challenge
+service: stori-challenge
+frameworkVersion: '3'
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  environment:
+    APP_NAME: ${env:APP_NAME}
+    DATABASE_CONNECTION: ${env:DATABASE_CONNECTION}
+    S3_BUCKET: ${env:S3_BUCKET}
+    DEFAULT_FILE: ${env:DEFAULT_FILE}
+    SENDER_EMAIL: ${env:SENDER_EMAIL}
+    SENDGRID_API_KEY: ${env:SENDGRID_API_KEY}
+  iam:
+    role:
+      statements:
+        # Allow functions to list all buckets
+        - Effect: Allow
+          Action: 's3:ListBucket'
+          Resource: '*'
+        # Allow functions to read objects in a bucket
+        - Effect: Allow
+          Action:
+            - 's3:GetObject'
+          Resource:
+            - 'arn:aws:s3:::stori-challenge-bucket-api/*'
+
+functions:
+  api:
+    handler: index.handler
+    events:
+      - httpApi: '*'
+
+resources:
+  Resources:
+    StoriTransactionsDatabase:
+      Type: AWS::RDS::DBInstance
+      Properties:
+        AllocatedStorage: 20
+        DBInstanceClass: db.m5.large
+        Engine: postgres
+        EngineVersion: 16.1
+        MasterUsername: ${env:DB_USER}
+        MasterUserPassword: ${env:DB_PASSWORD}
+        DBName: ${env:DB_NAME}
+        MultiAZ: false
+        PubliclyAccessible: true
+        VPCSecurityGroups:
+          - sg-0bc2f657
+    StoriChallengeBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${env:S3_BUCKET}
+    StoriEmailIdentity:
+      Type: AWS::SES::EmailIdentity
+      Properties:
+        EmailIdentity: ${env:SENDER_EMAIL}
+
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin

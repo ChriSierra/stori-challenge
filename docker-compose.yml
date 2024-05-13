@@ -1,0 +1,29 @@
+version: '3'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /usr/local/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - pg
+    environment:
+      CODE_BASE: /usr/local/app
+      DB_CONNECTION_MAX_POOLSIZE: 15
+      TIMEZONE: America/Mexico_City
+      DATABASE_CONNECTION: 'postgres://homestead:secret@pg/stori_transactions'
+
+  pg:
+    image: postgres:16.3
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_USER: homestead
+      POSTGRES_DB: stori_transactions
+    expose:
+      - "5432"
+    ports:
+      - "3001:5432"
